@@ -1,0 +1,292 @@
+
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumbs-alt">
+
+					<li><a href="<?php echo base_url();?>article/"><?php echo ARTICLE_PAGE;?></a>
+					</li>
+					<li><a class="current" href="<?php echo base_url();?>article/view/<?php echo $this->uri->segment(3); ?>/"><?php echo ARTICLE_VIEW;?></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<section class="panel">
+					<header class="panel-heading"><?php echo ARTICLE_VIEW;?>
+                            <span class="tools pull-right"><button class="btn btn-primary"
+								onclick="location.href ='<?php echo base_url();?>article/edit/<?php echo $this->uri->segment(3); ?>/'">Edit</button> </span>
+					</header>
+<div class="panel-body">
+						<div class="form">
+						<?php if ($ErrorMessages!='') { ?>
+<div class="alert alert-block alert-danger fade in">
+			<button data-dismiss="alert" class="close close-sm" type="button">
+				<i class="fa fa-times"></i>
+			</button>
+                                <?php echo $ErrorMessages;  ?>
+                            </div>
+<?php } ?>
+                            
+							<form class="cmxform form-horizontal" >
+								
+  
+<div class="form-group "  style="pading-top:10px;">
+									<label for="firstname" class="control-label col-lg-2">Title :</label>
+									<div class="col-lg-6" >
+										<p  class="form-control"><?php echo $details['title'];?></p>
+									</div>
+								</div>
+								
+								<div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Category :</label>
+									
+									<div class="col-lg-6">
+								<p  class="form-control">
+										<?php echo $details['category']; ?></p>
+									</div>
+								</div>
+								
+								<div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Sub Category :</label>
+									
+									<div class="col-lg-6">
+										
+										<p  class="form-control"> <?php echo $details['sub_category']; ?></p>
+									</div>
+								</div>
+
+<div class="form-group ">
+									<label for="firstname" class="control-label col-lg-2">Newspaper :</label>
+									<div class="col-lg-8" >
+
+                                                                               
+                                   
+                                    <?php foreach ($news_set as $news) { ?>
+                                        
+                                               <div  class="col-lg-3">  <p class="form-control"> <?php echo $news['name']; ?> </p></div>
+                                            <?php } ?> 
+                               
+
+
+										
+									</div>
+								</div>
+
+                                                            <div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Layout :</label>
+									
+									<div class="col-lg-6"><p  class="form-control"> 
+										
+										<?php echo $details['layout']; ?></p>
+									</div>
+								</div>
+
+                                                        <div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Page :</label>
+									
+									<div class="col-lg-6"><p  class="form-control"> 
+										
+										 <?php echo $details['page']; ?></p>
+									</div>
+								</div>
+
+                                                          <div class="form-group ">
+									<label for="Status" class="control-label col-lg-2">Status :</label>
+									<div class="col-lg-6"><p  class="form-control"> 
+<?php if($details['status']=="1"){ ?> Unfiled <?php } ?>
+ <?php if($details['status']=="2"){ ?> Filed <?php } ?> 
+<?php if($details['status']=="3"){ ?> Paged <?php } ?> 
+									</p></div>
+								</div>
+                                                 <div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Tags :</label>
+									
+									<div class="col-lg-8">
+
+                                                                      
+                                                        <?php if(sizeof($tags_set)>0){	foreach ( $tags_set as $tags_val ) {?>
+											<div  class="col-lg-3">  <p class="form-control"> <?php echo $tags_val['name']; ?> </p></div>
+                                                         <?php } }?> 
+                                                                            
+										
+										
+									</div>
+								</div>
+
+<div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Created :</label>
+									
+									<div class="col-lg-6"><p  class="form-control"> 
+										
+										<?php
+                                                    echo date('d/m/Y H:i:A', strtotime($details['created_on']));
+                                                    ?></p>
+									</div>
+								</div>
+
+<div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Modified :</label>
+									
+									<div class="col-lg-6"><p  class="form-control"> 
+										
+										 <?php
+                                                    echo date('d/m/Y H:i:A', strtotime($details['updated_on']));
+                                                    ?>
+									</div>
+								</div>
+
+
+<div class="form-group ">
+									<label for="lastname" class="control-label col-lg-2">Posted By :</label>
+									
+									<div class="col-lg-6"><p  class="form-control"> 
+										
+										 <?php echo $details['user_name']; ?></p>
+									</div>
+								</div>
+
+
+
+
+<!--tab nav start-->
+            <section class="panel">
+                <header class="panel-heading tab-bg-dark-navy-blue ">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#paper"><b>Paper</b></a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tab" href="#web"><b>Web</b></a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tab" href="#mobile"><b>Mobile</b></a>
+                        </li>
+                        
+                    </ul>
+                </header>
+                <div class="panel-body">
+                    <div class="tab-content">
+
+
+                        <div id="Paper" class="tab-pane active">
+
+				<div class="col-lg-12"><h5><b>Paper Summary</b> </h5> </div>
+ 
+
+				<div class="col-lg-12"><p><?php echo trim($details['paper_summary']);?></p></div>
+                        </div>
+
+
+<div id="web" class="tab-pane">
+
+			<div class="col-lg-12"> <h5><b>Web Summary</b> </h5> </div>
+ 
+
+			<div class="col-lg-12"><p><?php echo trim($details['web_summary']);?></p></div>
+                        </div>
+
+
+
+
+
+<div id="mobile" class="tab-pane">
+
+		<div class="col-lg-12"> <h5><b>Mobile Summary</b> </h5> </div>
+  		<div class="col-lg-12"><p><?php echo trim($details['mobile_summary']);?></p></div>
+                        </div>
+
+                        
+
+
+                        
+                    </div>
+                </div>
+            </section>
+            <!--tab nav end-->
+
+
+<!--tab nav start-->
+            <section class="panel">
+                <header class="panel-heading tab-bg-dark-navy-blue ">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#paper1"><b>Paper</b></a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tab" href="#web1"><b>Web</b></a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tab" href="#mobile1"><b>Mobile</b></a>
+                        </li>
+                        
+                    </ul>
+                </header>
+                <div class="panel-body">
+                    <div class="tab-content">
+
+
+                        <div id="paper1" class="tab-pane active">
+
+				<div class="col-lg-12"> <h5><b>Paper Description</b> </h5> </div>
+  				<div class="col-lg-12"><p><?php echo trim($details['paper_description']);?></p></div>
+                        </div>
+
+
+<div id="web1" class="tab-pane">
+
+			<div class="col-lg-12"> <h5><b>Web Description</b> </h5></div>
+ 
+			<div class="col-lg-12"><p><?php echo trim($details['web_description']);?></p></div>
+                        </div>
+
+
+
+
+
+<div id="mobile1" class="tab-pane">
+
+<div class="col-lg-12"> <h5><b>Mobile Description</b> </h5> </div>
+ 
+
+<div class="col-lg-12">
+<p><?php echo trim($details['mobile_description']);?></p>
+</div>
+                        </div>
+
+                        
+
+
+                        
+                    </div>
+                </div>
+            </section>
+            <!--tab nav end-->
+
+
+
+
+
+
+								
+								
+
+
+								
+							</form>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<!--mini statistics end-->
+	</section>
+</section>
+<!--main content end-->
+

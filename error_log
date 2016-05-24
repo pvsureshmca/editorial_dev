@@ -1,0 +1,118 @@
+[17-Apr-2015 06:29:53 America/Chicago] PHP Fatal error:  Uncaught SoapFault exception: [soap:Client] Server was unable to read request. ---> There is an error in XML document (2, 240). ---> Input string was not in a correct format. in /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php:464
+Stack trace:
+#0 /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php(464): SoapClient->__call('GetResultByID3', Array)
+#1 /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php(464): SoapClient->GetResultByID3(Array)
+#2 [internal function]: Property->payment()
+#3 /home2/innoppl2/public_html/titlewatchtest/system/core/CodeIgniter.php(360): call_user_func_array(Array, Array)
+#4 /home2/innoppl2/public_html/titlewatchtest/index.php(202): require_once('/home2/innoppl2...')
+#5 {main}
+  thrown in /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php on line 464
+[22-Apr-2015 05:15:25 America/Chicago] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/innoppl2/public_html/titlewatchtest/application/controllers/signup.php on line 217
+[27-Apr-2015 05:08:32 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php on line 53
+[28-Apr-2015 05:57:17 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php on line 397
+[07-May-2015 08:12:04 America/Chicago] PHP Fatal error:  Call to undefined method Signup_model::getUserCurrentPlan() in /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php on line 59
+[07-May-2015 08:12:10 America/Chicago] PHP Fatal error:  Call to undefined method Signup_model::getUserCurrentPlan() in /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php on line 59
+[07-May-2015 08:12:15 America/Chicago] PHP Fatal error:  Call to undefined method Signup_model::getUserCurrentPlan() in /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php on line 59
+[12-May-2015 07:55:14 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php on line 1164
+[13-May-2015 06:44:41 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php on line 234
+[13-May-2015 08:36:42 America/Chicago] PHP Fatal error:  Class 'Report_model' not found in /home2/innoppl2/public_html/titlewatchtest/system/core/Loader.php on line 304
+[13-May-2015 08:36:48 America/Chicago] PHP Fatal error:  Class 'Report_model' not found in /home2/innoppl2/public_html/titlewatchtest/system/core/Loader.php on line 304
+[13-May-2015 08:36:55 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/models/report_model.php on line 636
+[13-May-2015 08:37:02 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/models/signup_model.php on line 192
+[13-May-2015 08:37:16 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/models/signup_model.php on line 192
+[14-May-2015 04:49:58 America/Chicago] PHP Parse error:  syntax error, unexpected $end in /home2/innoppl2/public_html/titlewatchtest/application/controllers/signup.php on line 215
+[15-May-2015 01:44:53 America/Chicago] PHP Fatal error:  Uncaught SoapFault exception: [HTTP] Internal Server Error in /home2/innoppl2/public_html/titlewatchtest/application/controllers/report.php:1084
+Stack trace:
+#0 [internal function]: SoapClient->__doRequest('<?xml version="...', 'http://titlepoi...', 'http://www.Titl...', 1, 0)
+#1 /home2/innoppl2/public_html/titlewatchtest/application/controllers/report.php(1084): SoapClient->__call('GetResultByID3', Array)
+#2 /home2/innoppl2/public_html/titlewatchtest/application/controllers/report.php(1084): SoapClient->GetResultByID3(Array)
+#3 [internal function]: Report->curl_generate_report('287')
+#4 /home2/innoppl2/public_html/titlewatchtest/system/core/CodeIgniter.php(360): call_user_func_array(Array, Array)
+#5 /home2/innoppl2/public_html/titlewatchtest/index.php(202): require_once('/home2/innoppl2...')
+#6 {main}
+  thrown in /home2/innoppl2/public_html/titlewatchtest/application/controllers/report.php on line 1084
+[22-May-2015 09:08:52 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 86 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:08:52 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 86 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:09:10 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 72 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:09:11 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 72 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:09:30 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:09:30 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:09:38 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:09:39 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:10:04 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 09:10:04 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:22:26 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:22:27 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:23:08 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:23:08 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:23:12 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:27:21 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:27:21 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 84 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[22-May-2015 10:27:23 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 06:49:27 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 4 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 06:49:27 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 06:56:22 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 06:56:22 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 83 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:00:32 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 81 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:00:32 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 81 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:13:01 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:13:02 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:15:19 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 74 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:15:19 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 23 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:17:20 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[25-May-2015 07:17:20 America/Chicago] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home2/innoppl2/public_html/titlewatchtest/system/database/drivers/mysql/mysql_result.php on line 153
+[03-Jun-2015 09:00:31 America/Chicago] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING in /home2/innoppl2/public_html/titlewatchtest/application/controllers/gim.php on line 507
+[03-Jun-2015 09:00:34 America/Chicago] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING in /home2/innoppl2/public_html/titlewatchtest/application/controllers/gim.php on line 507
+[05-Jun-2015 06:07:10 America/Chicago] PHP Fatal error:  Cannot redeclare Cronrecurring::modifySubscriptionAmount() in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 766
+[17-Jun-2015 01:10:47 America/Chicago] PHP Fatal error:  Call to a member function profile_details() on a non-object in /home2/innoppl2/public_html/titlewatchtest/application/controllers/signup.php on line 461
+[17-Jun-2015 01:16:21 America/Chicago] PHP Fatal error:  Call to a member function profile_details() on a non-object in /home2/innoppl2/public_html/titlewatchtest/application/controllers/property.php on line 339
+[24-Jun-2015 05:35:37 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[24-Jun-2015 05:35:38 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[30-Jun-2015 23:48:48 America/Chicago] PHP Fatal error:  Uncaught SoapFault exception: [soap:Client] Server was unable to read request. ---> There is an error in XML document (2, 240). ---> Input string was not in a correct format. in /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php:852
+Stack trace:
+#0 /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php(852): SoapClient->__call('GetResultByID3', Array)
+#1 /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php(852): SoapClient->GetResultByID3(Array)
+#2 [internal function]: Member->enable_monitoring()
+#3 /home2/innoppl2/public_html/titlewatchtest/system/core/CodeIgniter.php(360): call_user_func_array(Array, Array)
+#4 /home2/innoppl2/public_html/titlewatchtest/index.php(202): require_once('/home2/innoppl2...')
+#5 {main}
+  thrown in /home2/innoppl2/public_html/titlewatchtest/application/controllers/member.php on line 852
+[03-Jul-2015 05:09:47 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[04-Jul-2015 04:41:17 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[04-Jul-2015 04:41:17 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[07-Jul-2015 04:46:03 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[07-Jul-2015 04:46:47 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[08-Jul-2015 04:54:40 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[10-Jul-2015 05:08:41 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[10-Jul-2015 05:08:42 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[14-Jul-2015 04:56:57 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:04:59 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:02 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:02 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:02 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:02 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:04 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:04 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:05 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:05 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:05 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:05 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:07 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:10 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:12 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:05:19 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:56 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:58 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:58 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:58 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:58 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:59 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:07:59 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111
+[15-Jul-2015 05:08:02 America/Chicago] PHP Fatal error:  Cannot use object of type stdClass as array in /home2/innoppl2/public_html/titlewatchtest/application/controllers/cronrecurring.php on line 111

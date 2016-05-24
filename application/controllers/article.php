@@ -1,0 +1,572 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/* CodeIgniter Account Controller
+ *
+* The class described User Details add update.
+*
+* @package        CodeIgniter
+* @author         suresh
+* @company	    Technologies
+* @link	   http://www.Technologies.com
+* @version 	   1.0
+*/
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+include APPPATH.'/controllers/common.php';
+class Article extends CI_Controller
+{
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model('login_model');
+	    $this->login_model->check_login();
+			
+		$this->load->model('article_model');
+	}
+
+
+	/* List article Begin*/
+	public function index()
+	{
+		$data['site_title'] = ARTICLE_PAGE." - ".ARTICLE_LIST;
+                 $set_data="";
+                if (($this->input->server('REQUEST_METHOD') == 'POST'))
+		{
+                     $set_data=$_POST;
+                 }
+		$data['article_list']=$this->article_model->article_list($set_data);
+                $data['category_list']=$this->article_model->category_list();
+                $data['newspaper_list']=$this->article_model->news_paper_list();
+                $data['user_list']=$this->article_model->user_list();
+                $data['tag_list']=$this->article_model->tag_list();
+                $data['post_data']=$set_data;
+		$this->load->view('header',$data);
+		$this->load->view('article/list', $data);
+		$this->load->view('footer', $data);
+	}
+	/* List article end*/
+
+	
+	/* Add article Begin */
+	public function add()
+	{
+		$data['site_title'] = ARTICLE_PAGE." - ".ARTICLE_ADD;
+		$data['ErrorMessages'] = '';
+		$data['news_set'] = array();
+		$data['tags_set'] = array();
+                                               $data['paper_summary'] = "";
+						$data['web_summary'] = "";	
+						$data['mobile_summary'] = "";
+                                                $data['paper_description'] = "";
+						$data['web_description'] = "";	
+						$data['mobile_description'] = "";
+		if (($this->input->server('REQUEST_METHOD') == 'POST'))
+		{
+
+                                                $data['paper_summary'] = $_POST['paper_summary'];
+						$data['web_summary'] = $_POST['web_summary'];	
+						$data['mobile_summary'] = $_POST['mobile_summary'];
+                                                $data['paper_description'] = $_POST['paper_description'];
+						$data['web_description'] = $_POST['web_description'];	
+						$data['mobile_description'] = $_POST['mobile_description'];
+
+                    if(isset($_POST['newspaper_id'])){ $data['news_set'] = $_POST['newspaper_id'];}
+                    else{
+                      $_POST['newspaper_id']= "";
+                     }
+		      if(isset($_POST['tag_id'])){ $data['tags_set'] = $_POST['tag_id'];}
+                     else{
+                      $_POST['tag_id']= array();
+                     }
+               // print_r($_POST);exit;
+			
+			$config = array(
+					array('field' => 'title',
+							'label' => 'Title',
+							'rules' => 'trim|required|is_unique[article.title]'),
+					
+					array('field' => 'cat_id',
+							'label' => 'Category',
+							'rules' => 'trim|required'),
+					array('field' => 'newspaper_id',
+							'label' => 'Newspaper',
+							'rules' => 'required'),
+					array('field' => 'sub_cat_id',
+							'label' => 'Sub Category',
+							'rules' => 'trim|required'),
+					array('field' => 'layout_id',
+							'label' => 'Layout',
+							'rules' => 'trim|required'),
+					array('field' => 'page_id',
+							'label' => 'Page',
+							'rules' => 'trim|required'),
+					array('field' => 'status',
+							'label' => 'status',
+							'rules' => 'trim|required')
+			);
+				
+			$this->form_validation->set_rules($config);
+			if($this->form_validation->run() == FALSE){
+				$data['ErrorMessages'] = validation_errors();
+			}
+			else
+			{
+				$set_data=$_POST;
+				
+				
+				
+				
+					$user_detail = array(
+						'title' => $set_data['title'],
+						'layout_id' => $set_data['layout_id'],
+						'cat_id' => $set_data['cat_id'],
+                                                'user_id' => $this->session->userdata('uid'),
+                                                'last_update_by' => $this->session->userdata('uid'),
+                                                'channel_id' => "1",
+						'sub_cat_id' => $set_data['sub_cat_id'],
+						'page_id' => $set_data['page_id'],	
+						'paper_summary' => $set_data['paper_summary'],
+						'web_summary' => $set_data['web_summary'],	
+						'mobile_summary' => $set_data['mobile_summary'],
+                                                'paper_description' => $set_data['paper_description'],
+						'web_description' => $set_data['web_description'],	
+						'mobile_description' => $set_data['mobile_description'],
+                                                'status' => $set_data['status'],
+                    				'created_on' => date("Y-m-d H:i:s"),
+                   				'updated_on' => date("Y-m-d H:i:s")
+					);
+					
+					$p_id=$this->article_model->add_article($user_detail);
+                                        $user_detail['article_id']=$p_id;
+                                        $ver_id=$this->article_model->add_article_version($user_detail);
+                                        $newspaper_data = array();$newspaper_ver=array(); $tag_data=array();$tag_ver=array();
+                                     if($_POST['newspaper_id']!="" && sizeof($_POST['newspaper_id'])>0){
+					for ($i=0;$i< sizeof($_POST['newspaper_id']);$i++){
+						$newspaper_data[] = array(
+								
+								'newspaper_id' => $_POST['newspaper_id'][$i], 
+                                                                 'article_id' => $p_id
+						);
+                                               $newspaper_ver[] = array(
+								
+								'newspaper_id' => $_POST['newspaper_id'][$i], 
+                                                                 'article_id' => $p_id,
+                                                                  'version_id' => $ver_id,
+						);
+					}
+                                    }
+                                        for ($i=0;$i< sizeof($_POST['tag_id']);$i++){
+                                                 
+                                              if($res_id=$this->article_model->get_tag_id($_POST['tag_id'][$i])){
+                                                 $tags_id= $res_id;
+                                              }
+                                         else{
+                                              $tag_detail = array(
+						'name' => $_POST['tag_id'][$i],
+						'status' => '1',
+                    				'created_on' => date("Y-m-d H:i:s"),
+                   				'updated_on' => date("Y-m-d H:i:s")
+					       );
+					$tags_id= $this->article_model->add_tags($tag_detail);
+                                        }    
+
+						$tag_data[] = array(
+								
+								'tag_id' => $tags_id, 
+                                                                 'article_id' => $p_id
+						);
+                                               $tag_ver[] = array(
+								
+								'tag_id' => $tags_id, 
+                                                                 'article_id' => $p_id,
+                                                                 'version_id' => $ver_id
+						);
+					}
+
+                                            
+
+
+ 
+					$this->article_model->add_article_newspaper($newspaper_data,$id="");
+                                        $this->article_model->add_article_tag($tag_data,$id="");
+                                        $this->article_model->add_article_newspaper_version($newspaper_ver);
+                                        $this->article_model->add_article_tag_version($tag_ver);
+					$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".CREATED_SUS);
+					redirect(base_url().'article/',"refresh");
+				
+				
+				
+			}
+		}
+		$data['category_list']=$this->article_model->category_list();
+                $data['newspaper_list']=$this->article_model->news_paper_list();
+                $data['tag_list']=$this->article_model->tag_name_list();
+                $data['page_list']=$this->article_model->page_list();
+                $data['layout_list']=$this->article_model->layout_list();
+		$this->load->view('header',$data);
+		$this->load->view('article/add', $data);
+		$this->load->view('footer');
+	}
+	
+	/* Edit article Begin */
+	public function edit($id)
+	{
+		$data['site_title'] = ARTICLE_PAGE." - ".ARTICLE_EDIT;
+		$data['ErrorMessages'] = '';
+	
+		if (($this->input->server('REQUEST_METHOD') == 'POST'))
+		{
+                        if(!isset($_POST['newspaper_id'])){
+                             $_POST['newspaper_id']= "";
+                        }
+		      if(!isset($_POST['tag_id'])){
+                        $_POST['tag_id']= array();
+                       }
+				
+			$us_id=$this->article_model->get_article_details($id);
+			$config = array(
+					array('field' => 'title',
+							'label' => 'Title',
+							'rules' => 'trim|required|edit_unique[article.title.'.$us_id['id'].']'),
+					array('field' => 'cat_id',
+							'label' => 'Category',
+							'rules' => 'trim|required'),
+					array('field' => 'newspaper_id',
+							'label' => 'Newspaper',
+							'rules' => 'required'),
+					array('field' => 'sub_cat_id',
+							'label' => 'Sub Category',
+							'rules' => 'trim|required'),
+					array('field' => 'layout_id',
+							'label' => 'Layout',
+							'rules' => 'trim|required'),
+					array('field' => 'page_id',
+							'label' => 'Page',
+							'rules' => 'trim|required'),
+					array('field' => 'status',
+							'label' => 'status',
+							'rules' => 'trim|required')
+			);
+				
+			$this->form_validation->set_rules($config);
+			if($this->form_validation->run() == FALSE){
+				$data['ErrorMessages'] = validation_errors();
+			}
+			else
+			{
+				$set_data=$_POST;
+				
+					$user_detail = array(
+						'title' => $set_data['title'],
+						'layout_id' => $set_data['layout_id'],
+						'cat_id' => $set_data['cat_id'],
+                                                'last_update_by' => $this->session->userdata('uid'),
+                                                'channel_id' => "1",
+						'sub_cat_id' => $set_data['sub_cat_id'],
+						'page_id' => $set_data['page_id'],	
+						'paper_summary' => $set_data['paper_summary'],
+						'web_summary' => $set_data['web_summary'],	
+						'mobile_summary' => $set_data['mobile_summary'],
+                                                'paper_description' => $set_data['paper_description'],
+						'web_description' => $set_data['web_description'],	
+						'mobile_description' => $set_data['mobile_description'],
+                                                'status' => $set_data['status'],
+                   				'updated_on' => date("Y-m-d H:i:s")
+					);
+					
+					$this->article_model->update_article($user_detail,$id);
+					
+                                        $user_detail['article_id']=$us_id['id'];
+                                        $user_detail['user_id'] = $this->session->userdata('uid');
+                                         $user_detail['created_on'] = date("Y-m-d H:i:s");
+                                        $ver_id=$this->article_model->add_article_version($user_detail);
+                                       $newspaper_data = array();$newspaper_ver=array(); $tag_data=array();$tag_ver=array();
+                                       if($_POST['newspaper_id']!="" && sizeof($_POST['newspaper_id'])>0){
+					for ($i=0;$i< sizeof($_POST['newspaper_id']);$i++){
+						$newspaper_data[] = array(
+								
+								'newspaper_id' => $_POST['newspaper_id'][$i], 
+                                                                 'article_id' => $us_id['id']
+						);
+                                               $newspaper_ver[] = array(
+								
+								'newspaper_id' => $_POST['newspaper_id'][$i], 
+                                                                 'article_id' => $us_id['id'],
+                                                                  'version_id' => $ver_id,
+						);
+					}
+                                  }
+                                        for ($i=0;$i< sizeof($_POST['tag_id']);$i++){
+                                                 
+                                              if($res_id=$this->article_model->get_tag_id($_POST['tag_id'][$i])){
+                                                 $tags_id= $res_id;
+                                              }
+                                         else{
+                                              $tag_detail = array(
+						'name' => $_POST['tag_id'][$i],
+						'status' => '1',
+                    				'created_on' => date("Y-m-d H:i:s"),
+                   				'updated_on' => date("Y-m-d H:i:s")
+					       );
+					$tags_id= $this->article_model->add_tags($tag_detail);
+                                        }    
+
+						$tag_data[] = array(
+								
+								'tag_id' => $tags_id, 
+                                                                 'article_id' => $us_id['id']
+						);
+                                               $tag_ver[] = array(
+								
+								'tag_id' => $tags_id, 
+                                                                 'article_id' => $us_id['id'],
+                                                                 'version_id' => $ver_id
+						);
+					}
+
+                                            
+
+
+ 
+					$this->article_model->add_article_newspaper($newspaper_data,$us_id['id']);
+                                        $this->article_model->add_article_tag($tag_data,$us_id['id']);
+                                        $this->article_model->add_article_newspaper_version($newspaper_ver);
+                                        $this->article_model->add_article_tag_version($tag_ver);
+                                      if($set_data['status']=="3"){
+                                            $this->generate_xml_file($id);
+                                      }
+					$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".UPDATED_SUS);
+					redirect(base_url().'article/',"refresh");
+				
+			}
+		}
+	
+		if($this->article_model->get_article_details($id))
+		{
+			$news_set_val=array();
+                        $data['details']=$this->article_model->get_article_details($id);
+                        $data['category_list']=$this->article_model->category_list();
+		        $data['newspaper_list']=$this->article_model->news_paper_list();
+		        $data['tag_list']=$this->article_model->tag_name_list();
+		        $data['page_list']=$this->article_model->page_list();
+		        $data['layout_list']=$this->article_model->layout_list();
+                       
+                        $news_set = $this->article_model->get_article_newspaper($id);
+                         foreach ($news_set as $item) {
+			     $news_set_val[] = $item['newspaper_id'];
+			}
+                        $data['news_set'] =$news_set_val;
+		        $data['tags_set'] = $this->article_model->get_article_tags($id);
+                         $data['article_version']=$this->article_model->article_version_list($id);
+			$this->load->view('header',$data);
+			$this->load->view('article/edit', $data);
+			$this->load->view('footer');
+		}
+		else {
+			redirect(base_url().'article/','refresh');
+		}
+	
+	}
+
+
+       public function view($id)
+	{
+		$data['site_title'] = ARTICLE_PAGE." - ".ARTICLE_VIEW;
+		$data['ErrorMessages'] = '';
+	
+		
+		if($this->article_model->get_article_details($id))
+		{
+			$news_set_val=array();
+                        $data['details']=$this->article_model->get_article_details($id);
+                        $data['category_list']=$this->article_model->category_list();
+		        $data['newspaper_list']=$this->article_model->news_paper_list();
+		        $data['tag_list']=$this->article_model->tag_name_list();
+		        $data['page_list']=$this->article_model->page_list();
+		        $data['layout_list']=$this->article_model->layout_list();
+                        $news_set = $this->article_model->get_article_newspaper($id);
+                         $data['comment_set'] = $this->article_model->get_article_comment($id); 
+                        $data['news_set'] =$news_set;
+		        $data['tags_set'] = $this->article_model->get_article_tags($id);
+			$this->load->view('header',$data);
+			$this->load->view('article/view', $data);
+			$this->load->view('footer');
+		}
+		else {
+			redirect(base_url().'article/','refresh');
+		}
+	
+	}
+	
+	
+	
+	
+	//Delete the user
+	public function delete($id)
+	{
+		if ($this->article_model->get_article_details($id))
+		{
+			$result = $this->article_model->delete_article($id);
+			if($result){
+				$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".DELETED_SUS);
+				redirect(base_url().'article/', 'refresh');
+			}
+		}
+		else
+		{
+			redirect(base_url().'article/', 'refresh');
+		}
+	}
+	
+	public function generate_xml_file($id){
+
+               $rss_txt="";
+		$details=$this->article_model->get_article_details($id);
+                $news_set = $this->article_model->get_article_newspaper($id);
+                $tags_set = $this->article_model->get_article_tags($id);
+                $comment_set = $this->article_model->get_article_comment($id);
+               
+             	 if(!is_dir(XML_FILE_PATH.CleanString($details['category']) ."/")) {
+                   $old_umask = umask(0);
+    		   mkdir(XML_FILE_PATH.CleanString($details['category'])."/", 0777);
+                   umask($old_umask);
+		  }
+                 
+                  if(!is_dir(XML_FILE_PATH.CleanString($details['category']) ."/".CleanString($details['sub_category']) ."/")) {
+                   $old_umask = umask(0);
+    		   mkdir(XML_FILE_PATH.CleanString($details['category'])."/".CleanString($details['sub_category']) ."/", 0777);
+                   umask($old_umask);
+		  }
+                  
+
+               $myFile = XML_FILE_PATH.CleanString($details['category'])."/".CleanString($details['sub_category']) ."/".CleanString($details['title']).".xml";
+		$fh = fopen($myFile, 'w') or die("can't open file");
+
+		$rss_txt .= '<?xml version="1.0" encoding="utf-8"?>';
+		$rss_txt .= "<rss version='2.0'>";
+		$rss_txt .= '<article>';
+                $rss_txt .= '<title>' .$details['title']. '</title>';
+                $rss_txt .= '<category>' .$details['category']. '</category>'; 
+                $rss_txt .= '<sub_category>' .$details['sub_category']. '</sub_category>'; 
+                $rss_txt .= '<layout>' .$details['layout']. '</layout>';
+                $rss_txt .= '<page>' .$details['page']. '</page>'; 
+                $rss_txt .= '<paper_summary>' .$details['paper_summary']. '</paper_summary>';
+                $rss_txt .= '<web_summary>' .$details['web_summary']. '</web_summary>';
+                $rss_txt .= '<mobile_summary>' .$details['mobile_summary']. '</mobile_summary>';
+		$rss_txt .= '<paper_description>' .$details['paper_description']. '</paper_description>';
+                $rss_txt .= '<web_description>' .$details['web_description']. '</web_description>';
+                $rss_txt .= '<mobile_description>' .$details['mobile_description']. '</mobile_description>';
+		    
+		   
+			$rss_txt .= '<newspaper>';
+			if(sizeof($news_set)>0){
+			foreach ($news_set as $news) {
+			$rss_txt .= '<name>' .$news['name']. '</name>';
+			}}
+
+			$rss_txt .= '</newspaper>';
+                       
+                     $rss_txt .= '<comments>';
+			if(sizeof($comment_set)>0){
+			foreach ($comment_set as $comment) {
+			$rss_txt .= '<description>' .$comment['description']. '</description>';
+			}}
+
+			$rss_txt .= '</comments>';
+
+                        $rss_txt .= '<tags>';
+              		  if(sizeof($tags_set)>0){
+                  	foreach ( $tags_set as $tags_val){
+			$rss_txt .= '<name>' .$tags_val['name']. '</name>';
+			}}
+
+			$rss_txt .= '</tags>';
+		    
+		$rss_txt .= '</article>';
+		$rss_txt .= '</rss>';
+
+		fwrite($fh, $rss_txt);
+		fclose($fh);
+		chmod($myFile, 0777);
+
+	
+		
+                
+          }
+
+	public function ajax_sub_category_list()
+	{
+		$SelId=(isset($_POST['SelId'])) ? $_POST['SelId']:'';
+		
+		if(!empty($SelId)){
+			$data=$this->article_model->sub_category_list($SelId);
+			if(sizeof($data)>0){
+				$JSonText='{"": "Select Sub category"}';
+				foreach($data as $val)
+				{
+					$JSonText.=',{"'.$val['id'].'": "'.$val['name'].'"}';
+				}
+				echo '{"ajax_res":"true","sel_list":['.$JSonText.']}';
+			}
+			else{
+				echo '{"ajax_res":"true","sel_list":[{"": "Select Sub category"}]}';
+			}
+		}
+		else{	echo '{"ajax_res":"false","ajax_msg":"Please Select valid action"}';	}
+		
+	}
+
+        public function ajax_get_article_version()
+	{
+		$SelId=(isset($_POST['SelId'])) ? $_POST['SelId']:'';
+		 $type=(isset($_POST['type'])) ? $_POST['type']:'';
+		if(!empty($SelId)){
+			$data=$this->article_model->article_version_list_id($SelId, $type);
+			if($data){
+				echo $data;
+			}
+			else{
+				echo "false";
+			}
+		}
+		else{	echo "false";	}
+		
+	}
+
+
+
+public function get_files(){
+
+           
+$_POST['dir'] = urldecode($_POST['dir']);
+$root="";
+if( file_exists($root . $_POST['dir']) ) {
+	$files = scandir($root . $_POST['dir']);
+	natcasesort($files);
+	if( count($files) > 2 ) { /* The 2 accounts for . and .. */
+		echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
+		// All dirs
+		foreach( $files as $file ) {
+			if( file_exists($root . $_POST['dir'] . $file) && $file != '.' && $file != '..' && is_dir($root . $_POST['dir'] . $file) ) {
+				echo "<li class=\"directory collapsed\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "/\">" . htmlentities($file) . "</a></li>";
+			}
+		}
+		// All files
+		foreach( $files as $file ) {
+			if( file_exists($root . $_POST['dir'] . $file) && $file != '.' && $file != '..' && !is_dir($root . $_POST['dir'] . $file) ) {
+				$ext = preg_replace('/^.*\./', '', $file);
+				echo "<li class=\"file ext_$ext\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "\">" . htmlentities($file) . "</a></li>";
+			}
+		}
+		echo "</ul>";	
+	}
+}
+
+      }
+	
+	
+
+}
+
+/* End of file article.php */
+/* Location: ./application/controllers/article.php */
