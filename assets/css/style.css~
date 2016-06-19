@@ -5713,3 +5713,12 @@ right: -1px;
 .custum_active{
 	    color: #1FB5AD;
 }
+
+.demo {
+    overflow: auto;
+    max-height: 300px;
+    max-width: 600px;
+}
+
+
+}

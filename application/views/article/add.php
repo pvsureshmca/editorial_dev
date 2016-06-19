@@ -153,14 +153,14 @@
 
                         <div id="Paper" class="tab-pane active">
 
-<div class="col-lg-8">
+<div class="col-lg-3">
                             <h5><b>Paper Summary</b> 
 
 </h5> 
 
 </div>
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('paper_sum','paper_summary')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="paper_sum" class="demo"></div>
 
@@ -177,14 +177,14 @@
 
 <div id="web" class="tab-pane">
 
-<div class="col-lg-8">
+<div class="col-lg-3">
                             <h5><b>Web Summary</b> 
 
 </h5> 
 
 </div>
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('web_sum','web_summary')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="web_sum" class="demo"></div>
 
@@ -204,14 +204,14 @@
 
 <div id="mobile" class="tab-pane">
 
-<div class="col-lg-8">
+<div class="col-lg-3">
                             <h5><b>Mobile Summary</b> 
 
 </h5> 
 
 </div>
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('mobile_sum','mobile_summary')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="mobile_sum" class="demo"></div>
 
@@ -257,14 +257,14 @@
 
                         <div id="paper1" class="tab-pane active">
 
-<div class="col-lg-8">
+<div class="col-lg-3">
                             <h5><b>Paper Description</b> 
 
 </h5> 
 
 </div>
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('paper_desc','paper_description')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="paper_desc" class="demo"></div>
 
@@ -281,14 +281,14 @@
 
 <div id="web1" class="tab-pane">
 
-<div class="col-lg-8">
+<div class="col-lg-3">
                             <h5><b>Web Description</b> 
 
 </h5> 
 
 </div>
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('web_desc','web_description')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="web_desc" class="demo"></div>
 
@@ -308,14 +308,14 @@
 
 <div id="mobile1" class="tab-pane">
 
-<div class="col-lg-8">
+<div class="col-lg-3">
                             <h5><b>Mobile Description</b> 
 
 </h5> 
 
 </div>
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('mobile_desc','mobile_description')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="mobile_desc" class="demo"></div>
 

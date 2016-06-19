@@ -171,11 +171,13 @@
 			</select>
                        </div>
 
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
 
 
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('paper_sum','paper_summary')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="paper_sum" class="demo"></div>
 
@@ -212,9 +214,11 @@
 
 			</select>
                        </div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('web_sum','web_summary')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="web_sum" class="demo"></div>
 
@@ -254,9 +258,11 @@
 
 			</select>
                        </div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('mobile_sum','mobile_summary')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="mobile_sum" class="demo"></div>
 
@@ -322,9 +328,11 @@
 
 			</select>
                        </div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('paper_desc','paper_description')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="paper_desc" class="demo"></div>
 
@@ -361,9 +369,11 @@
 
 			</select>
                        </div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('web_desc','web_description')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="web_desc" class="demo"></div>
 
@@ -402,9 +412,11 @@
 
 			</select>
                        </div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
  <div class="col-lg-1" style="padding-bottom: 10Px;">  <button class="btn btn-primary"  onclick="get_path('mobile_desc','mobile_description')" type="button">PTI</button> </div> 
- <div class="col-lg-3" style="padding-bottom: 10Px;" > 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
 
 <div id="mobile_desc" class="demo"></div>
 

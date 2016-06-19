@@ -45,6 +45,12 @@ class Article_model extends CI_Model {
                     $this->db->where("P.status", $data['status']);
                     }
                  }
+                else{
+        
+                      $this->db->where("DATE_FORMAT(P.created_on, '%m/%d/%Y') = DATE_FORMAT(CURDATE(), '%m/%d/%Y')");
+                      $this->db->where("P.status !=", '3');
+
+                 }
 		$this->db->order_by("P.id", "desc");
 		$query = $this->db->get();
 	

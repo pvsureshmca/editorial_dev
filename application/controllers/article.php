@@ -137,7 +137,9 @@ class Article extends CI_Controller
 					);
 					
 					$p_id=$this->article_model->add_article($user_detail);
+
                                         $user_detail['article_id']=$p_id;
+
                                         $ver_id=$this->article_model->add_article_version($user_detail);
                                         $newspaper_data = array();$newspaper_ver=array(); $tag_data=array();$tag_ver=array();
                                      if($_POST['newspaper_id']!="" && sizeof($_POST['newspaper_id'])>0){
@@ -191,6 +193,11 @@ class Article extends CI_Controller
                                         $this->article_model->add_article_tag($tag_data,$id="");
                                         $this->article_model->add_article_newspaper_version($newspaper_ver);
                                         $this->article_model->add_article_tag_version($tag_ver);
+
+                                          
+                                         if($set_data['status']=="3"){
+                                            $this->generate_xml_file(md5($p_id));
+                                         }
 					$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".CREATED_SUS);
 					redirect(base_url().'article/',"refresh");
 				
@@ -419,9 +426,11 @@ class Article extends CI_Controller
 	}
 	
 	public function generate_xml_file($id){
-
+ 
                $rss_txt="";
 		$details=$this->article_model->get_article_details($id);
+
+          
                 $news_set = $this->article_model->get_article_newspaper($id);
                 $tags_set = $this->article_model->get_article_tags($id);
                 $comment_set = $this->article_model->get_article_comment($id);
@@ -450,12 +459,12 @@ class Article extends CI_Controller
                 $rss_txt .= '<sub_category>' .$details['sub_category']. '</sub_category>'; 
                 $rss_txt .= '<layout>' .$details['layout']. '</layout>';
                 $rss_txt .= '<page>' .$details['page']. '</page>'; 
-                $rss_txt .= '<paper_summary>' .$details['paper_summary']. '</paper_summary>';
-                $rss_txt .= '<web_summary>' .$details['web_summary']. '</web_summary>';
-                $rss_txt .= '<mobile_summary>' .$details['mobile_summary']. '</mobile_summary>';
-		$rss_txt .= '<paper_description>' .$details['paper_description']. '</paper_description>';
-                $rss_txt .= '<web_description>' .$details['web_description']. '</web_description>';
-                $rss_txt .= '<mobile_description>' .$details['mobile_description']. '</mobile_description>';
+                $rss_txt .= '<paper_summary>' .html_entity_decode($details['paper_summary']). '</paper_summary>';
+                $rss_txt .= '<web_summary>' .html_entity_decode($details['web_summary']). '</web_summary>';
+                $rss_txt .= '<mobile_summary>' .html_entity_decode($details['mobile_summary']). '</mobile_summary>';
+		$rss_txt .= '<paper_description>' .html_entity_decode($details['paper_description']). '</paper_description>';
+                $rss_txt .= '<web_description>' .html_entity_decode($details['web_description']). '</web_description>';
+                $rss_txt .= '<mobile_description>' .html_entity_decode($details['mobile_description']). '</mobile_description>';
 		    
 		   
 			$rss_txt .= '<newspaper>';
@@ -490,7 +499,6 @@ class Article extends CI_Controller
 		chmod($myFile, 0777);
 
 	
-		
                 
           }
 
