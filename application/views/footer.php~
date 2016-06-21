@@ -169,7 +169,8 @@ GoToPrintJSONAjaxDetails('State','<?php echo $post_data["cat_id"];?>','sub_cat_i
                  
 
                  CKEDITOR.replace( 'paper_summary',{
-				extraPlugins : 'wordcount',
+				extraPlugins : 'wordcount,scayt',
+                                scayt_autoStartup: true,
 				wordcount : {
 					showCharCount : true,
 					showWordCount : true,
@@ -183,7 +184,8 @@ GoToPrintJSONAjaxDetails('State','<?php echo $post_data["cat_id"];?>','sub_cat_i
 				} );
 
                 CKEDITOR.replace( 'web_summary',{
-				extraPlugins : 'wordcount',
+				extraPlugins : 'wordcount,scayt',
+                                scayt_autoStartup: true,
 				wordcount : {
 					showCharCount : true,
 					showWordCount : true,
@@ -197,7 +199,8 @@ GoToPrintJSONAjaxDetails('State','<?php echo $post_data["cat_id"];?>','sub_cat_i
 				} );
 
                 CKEDITOR.replace( 'mobile_summary',{
-				extraPlugins : 'wordcount',
+				extraPlugins : 'wordcount,scayt',
+                                scayt_autoStartup: true,
 				wordcount : {
 					showCharCount : true,
 					showWordCount : true,
@@ -212,7 +215,8 @@ GoToPrintJSONAjaxDetails('State','<?php echo $post_data["cat_id"];?>','sub_cat_i
 
 
  CKEDITOR.replace( 'paper_description',{
-				extraPlugins : 'wordcount',
+				extraPlugins : 'wordcount,scayt',
+                                scayt_autoStartup: true,
 				wordcount : {
 					showCharCount : true,
 					showWordCount : true,
@@ -225,7 +229,8 @@ GoToPrintJSONAjaxDetails('State','<?php echo $post_data["cat_id"];?>','sub_cat_i
 				}
 				} );
  CKEDITOR.replace( 'web_description',{
-				extraPlugins : 'wordcount',
+				extraPlugins : 'wordcount,scayt',
+                                scayt_autoStartup: true,
 				wordcount : {
 					showCharCount : true,
 					showWordCount : true,
@@ -238,7 +243,8 @@ GoToPrintJSONAjaxDetails('State','<?php echo $post_data["cat_id"];?>','sub_cat_i
 				}
 				} );
  CKEDITOR.replace( 'mobile_description',{
-				extraPlugins : 'wordcount',
+				extraPlugins : 'wordcount,scayt',
+                                scayt_autoStartup: true,
 				wordcount : {
 					showCharCount : true,
 					showWordCount : true,
