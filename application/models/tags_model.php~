@@ -81,6 +81,9 @@ class Tags_model extends CI_Model {
 		$this->db->where('md5(id)', $uid);
 		$this->db->delete('tags');
 		
+                 $this->db->where('md5(tag_id)', $uid);
+		 $this->db->delete('article_tags');
+
 		return true;
 	}
 

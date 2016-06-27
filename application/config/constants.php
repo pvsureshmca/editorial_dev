@@ -74,9 +74,15 @@ define('TAGS_ADD','Add Tag');
 define('TAGS_EDIT','Edit Tag');
 
 define('SUBCAT_PAGE','Sub Category');
-define('SUBCAT_LIST','Category Sub List');
+define('SUBCAT_LIST','Sub Category List');
 define('SUBCAT_ADD','Add Sub Category');
 define('SUBCAT_EDIT','Edit Sub Category');
+
+define('SUBTWOCAT_PAGE','Sub Level Two Category');
+define('SUBTWOCAT_LIST','Sub Level Two Category List');
+define('SUBTWOCAT_ADD','Add Sub Level Two Category');
+define('SUBTWOCAT_EDIT','Edit Sub Level Two Category');
+
 
 //newspapers
 

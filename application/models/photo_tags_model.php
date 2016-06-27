@@ -9,7 +9,7 @@
  * @link	   http://www.Technologies.com
  * @version 	   1.0
  */
-class Tags_model extends CI_Model {
+class Photo_tags_model extends CI_Model {
 
 	public function __construct()
 	{
@@ -27,7 +27,7 @@ class Tags_model extends CI_Model {
 		$select=array('*');
 	
 		$this->db->select($select);
-		$this->db->from('tags');
+		$this->db->from('photo_tags');
 		$this->db->order_by("id", "desc");
 		$query = $this->db->get();
 	
@@ -43,7 +43,7 @@ class Tags_model extends CI_Model {
 	{
 		$select=array('*');
 		$this->db->select($select);
-		$this->db->from('tags');
+		$this->db->from('photo_tags');
 		$this->db->where("md5(id)", $id);
 		$query = $this->db->get();
 	
@@ -60,7 +60,7 @@ class Tags_model extends CI_Model {
 	
 	public function add_tags($data)
 	{
-		$this->db->insert("tags", $data);
+		$this->db->insert("photo_tags", $data);
 		return $this->db->insert_id();
 	}
 	
@@ -70,7 +70,7 @@ class Tags_model extends CI_Model {
 	{
 	
 		$this->db->where('md5(id)', $uid);
-		$this->db->update('tags',$set_data);
+		$this->db->update('photo_tags',$set_data);
 		return true;
 	}
 	
@@ -79,11 +79,11 @@ class Tags_model extends CI_Model {
 	
 		
 		$this->db->where('md5(id)', $uid);
-		$this->db->delete('tags');
+		$this->db->delete('photo_tags');
+               
+                 $this->db->where_in('md5(tag_id)', $uid);
+		 $this->db->delete('photos_tags');
 		
-                 $this->db->where('md5(tag_id)', $uid);
-		 $this->db->delete('article_tags');
-
 		return true;
 	}
 

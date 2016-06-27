@@ -173,6 +173,32 @@
 						</a></li> 
 						<?php } ?>
 
+                                              <li class="sub-menu"><a
+							class="<?php if($this->uri->segment(1)=="photo_gallery"){ echo "active" ;} ?>"
+							href="javascript:;"> <i class="fa fa-picture-o"></i> <span>Photo Gallery</span>
+						</a>
+							<ul class="sub">
+								<li	class="<?php if($this->uri->segment(2)=="photos"){ echo "active" ;} ?>"><a
+								
+									href="<?php echo base_url();?>photo_gallery/photos/">Photos</a></li>
+								<li	class="<?php if($this->uri->segment(2)=="photos"){ echo "active" ;} ?>"><a
+								
+									href="<?php echo base_url();?>photo_gallery/category/">Category</a></li>
+								<li	class="<?php if($this->uri->segment(2)=="sub_category"){ echo "active" ;} ?>"><a
+								
+									href="<?php echo base_url();?>photo_gallery/sub_category/">Sub
+										Category</a></li>
+								<li	class="<?php if($this->uri->segment(2)=="sub_two_category"){ echo "active" ;} ?>"><a
+								
+									href="<?php echo base_url();?>photo_gallery/sub_two_category/">Sub Level Two Category</a></li>
+
+                                                      <li	class="<?php if($this->uri->segment(2)=="tags"){ echo "active" ;} ?>"><a
+								
+									href="<?php echo base_url();?>photo_gallery/tags/">Tags</a></li>
+
+
+							</ul></li>
+
 
 
 

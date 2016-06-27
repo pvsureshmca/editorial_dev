@@ -101,6 +101,30 @@ var Script = function () {
                 name: "Please enter name"
             }
         });
+
+// validate signup form on keyup and submit
+        $("#sub_two_category_add").validate({
+            rules: {
+            	
+            	cat_id: {
+                    required: function () {
+                        return ($("#cat_id option:selected").val() == "");
+                    }
+                },
+                 sub_cat_id: {
+                    required: function () {
+                        return ($("#sub_cat_id option:selected").val() == "");
+                    }
+                },
+               name: "required"
+            },
+            messages: {
+            	
+            	cat_id: "Please select category",
+                name: "Please enter name",
+                sub_cat_id: "Please select sub category"
+            }
+        });
         
      // validate signup form on keyup and submit
         $("#article_add").validate({
@@ -215,6 +239,69 @@ function GoToPrintJSONAjaxDetails(SelType,SelId,ResDiv,Default){
 }
 
 
+//JavaScript Document
+function GoToPrintJSONAjaxData(URL,SelType,SelId,ResDiv,Default){
+	//alert(SelId+'------'+Default);
+	var AjacRes=jQuery.ajax({ 
+		url: base_url+URL,
+		type: "POST",
+		dataType:'json',
+		data: {SelType:SelType,SelId:SelId},
+		error:function (xhr){
+			alert('Server Error');
+		},
+		success: function(JSonRes){
+			if(JSonRes.ajax_res=='true'){
+				jQuery('#'+ResDiv+' >option').remove();
+				var DataList=JSonRes.sel_list;
+				jQuery.each(DataList, function(i, DataDet){
+					jQuery.each(DataDet, function(key, val){						
+						var myCombo= jQuery('#'+ResDiv);
+						if(Default==key){				
+							myCombo.append(jQuery('<option value="'+key+'" selected="selected">'+val+'</option>'));
+						}
+						else{
+							myCombo.append(jQuery('<option value="'+key+'">'+val+'</option>'));
+						}
+					});
+				}); 		
+			}
+                   
+		}
+	});
+}
+
+
+function GoToPrintJSONAjaxDetailsPhotos(SelType,SelId,ResDiv,Default){
+	//alert(SelId+'------'+Default);
+	var AjacRes=jQuery.ajax({ 
+		url: base_url+'photos/ajax_sub_category_list/',
+		type: "POST",
+		dataType:'json',
+		data: {SelType:SelType,SelId:SelId},
+		error:function (xhr){
+			alert('Server Error');
+		},
+		success: function(JSonRes){
+			if(JSonRes.ajax_res=='true'){
+				jQuery('#'+ResDiv+' >option').remove();
+				var DataList=JSonRes.sel_list;
+				jQuery.each(DataList, function(i, DataDet){
+					jQuery.each(DataDet, function(key, val){						
+						var myCombo= jQuery('#'+ResDiv);
+						if(Default==key){				
+							myCombo.append(jQuery('<option value="'+key+'" selected="selected">'+val+'</option>'));
+						}
+						else{
+							myCombo.append(jQuery('<option value="'+key+'">'+val+'</option>'));
+						}
+					});
+				}); 		
+			}
+                   
+		}
+	});
+}
 function GoToAddSalesperson(SelType,SelId,order_id){
 	
 	//alert(SelId+'------'+order_id+'......'+SelType);

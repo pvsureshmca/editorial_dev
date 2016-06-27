@@ -196,7 +196,7 @@ class Article extends CI_Controller
 
                                           
                                          if($set_data['status']=="3"){
-                                            $this->generate_xml_file($p_id);
+                                            $this->generate_xml_file(md5($p_id));
                                          }
 					$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".CREATED_SUS);
 					redirect(base_url().'article/',"refresh");
