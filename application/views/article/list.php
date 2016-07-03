@@ -152,6 +152,23 @@ value="<?php if ($post_data!=""){ if($post_data['from']) { echo $post_data['from
 <div class="col-md-6">
                                     
                                     <div class="input-group input-large" style="padding-bottom: 16px;">
+                                        <span class="input-group-addon">Photos : </span>
+                                        <select class="form-control" style="width: 365px;" name="photos_id" id="photos_id">
+                                    <option value="">Select Photo</option>
+                                    <?php foreach ($photos_list as $photos) { ?>
+                                        <option value="<?php echo $photos['file_name']; ?>"
+                                                <?php if ($post_data!=""){ if($photos['file_name'] == $post_data['photos_id']) { ?> selected = "selected" <?php } } ?>
+                                                > <?php echo $photos['name']; ?></option>
+                                            <?php } ?>
+                                </select>
+
+                                    </div>
+                                   
+                                </div> 
+
+<div class="col-md-6">
+                                    
+                                    <div class="input-group input-large" style="padding-bottom: 16px;">
                                         <button class="btn btn-primary" type="submit">Search</button>
                                        
 

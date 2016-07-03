@@ -62,6 +62,13 @@
     
     
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+
+
+<?php if($this->uri->segment(2)=="photos"){  ?>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+
+<?php } ?>
+
    
 <!-- Just for debugging purposes. Don't actually copy this line! -->
 <!--[if lt IE 9]>
@@ -181,7 +188,7 @@
 								<li	class="<?php if($this->uri->segment(2)=="photos"){ echo "active" ;} ?>"><a
 								
 									href="<?php echo base_url();?>photo_gallery/photos/">Photos</a></li>
-								<li	class="<?php if($this->uri->segment(2)=="photos"){ echo "active" ;} ?>"><a
+								<li	class="<?php if($this->uri->segment(2)=="category"){ echo "active" ;} ?>"><a
 								
 									href="<?php echo base_url();?>photo_gallery/category/">Category</a></li>
 								<li	class="<?php if($this->uri->segment(2)=="sub_category"){ echo "active" ;} ?>"><a

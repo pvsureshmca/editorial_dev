@@ -180,7 +180,44 @@ var Script = function () {
             
            
         });
+   
 
+     // validate signup form on keyup and submit
+        $("#photos_add").validate({
+            rules: { 
+            	name: "required",
+                event: "required",
+              image: "required"
+                
+            },
+            messages: {
+            	title: "Please enter name",
+                event: "Please enter event",
+            	
+            	image: "Please select select image"
+            }
+            
+           
+        });
+
+
+
+
+          // validate signup form on keyup and submit
+        $("#photos_edit").validate({
+            rules: { 
+            	name: "required",
+            	event: "Please enter event"
+              
+                
+            },
+            messages: {
+            	title: "Please enter name",
+            	event: "Please enter event",
+            }
+            
+           
+        });
            // validate signup form on keyup and submit
         $("#article_comment_add").validate({
             rules: { 

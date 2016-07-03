@@ -35,12 +35,13 @@ class Photos extends CI_Controller
                      $set_data=$_POST;
                  }
 		$data['photos_list']=$this->photos_model->photos_list($set_data);
-                $data['cat_list']=$this->photos_model->photos_category_list();
-                $data['tag_list']=$this->photos_model->tag_list();
+                $data['cat_list']=$this->photos_model->photo_category_list();
+               
                 $data['post_data']=$set_data;
 		$this->load->view('header',$data);
 		$this->load->view('photo_gallery/photos/list', $data);
 		$this->load->view('footer', $data);
+                $this->load->view('photo_gallery/photos/script1', $data);
                 
 	}
 	/* List photos end*/
@@ -53,12 +54,13 @@ class Photos extends CI_Controller
 		$data['ErrorMessages'] = '';
 		$data['cat_set'] = array();
                 $data['sub_cat_set'] = array();
-                $data['sub_two_two_set'] = array();
+                $data['sub_two_cat_set'] = array();
 		$data['tags_set'] = array();
                                                $data['description'] = "";
 						
 		if (($this->input->server('REQUEST_METHOD') == 'POST'))
 		{
+
 
                                                 $data['description'] = $_POST['description'];
 						
@@ -85,18 +87,13 @@ class Photos extends CI_Controller
 							'label' => 'Name',
 							'rules' => 'trim|required|is_unique[photos.name]'),
 					
-					array('field' => 'cat_id[]',
-							'label' => 'Category',
-							'rules' => 'trim|required'),
-					array('field' => 'sub_cat_id[]',
-							'label' => 'Sub Category',
-							'rules' => 'required'),
-					array('field' => 'sub_two_cat_id[]',
-							'label' => 'Sub level two category',
-							'rules' => 'trim|required'),
+					
 					array('field' => 'event',
 							'label' => 'Event',
 							'rules' => 'trim|required'),
+                                        array('field' => 'image',
+							'label' => 'Photo',
+							'rules' => 'trim|xss_clean'),
 					array('field' => 'status',
 							'label' => 'status',
 							'rules' => 'trim|required')
@@ -106,6 +103,9 @@ class Photos extends CI_Controller
 			if($this->form_validation->run() == FALSE){
 				$data['ErrorMessages'] = validation_errors();
 			}
+                        elseif(sizeof($_POST['cat_id']) <= 0 ){
+                              $data['ErrorMessages'] = "Category field is required";
+                        }
 			else
 			{
 				$set_data=$_POST;
@@ -217,8 +217,8 @@ class Photos extends CI_Controller
  
 					$this->photos_model->add_photos_category($cat_data, $id="");
                                         $this->photos_model->add_photos_tag($tag_data,$id="");
-                                        $this->photos_model->add_photos_sub_category($sub_cat, $id="");
-                                        $this->photos_model->add_photos_sub_two_category($sub_two_cat, $id="");
+                                        $this->photos_model->add_photos_sub_category($sub_cat_data, $id="");
+                                        $this->photos_model->add_photos_sub_two_category($sub_two_cat_data, $id="");
 
                                           
                                         
@@ -238,6 +238,7 @@ class Photos extends CI_Controller
                 $this->load->view('header',$data);
 		$this->load->view('photo_gallery/photos/add', $data);
 		$this->load->view('footer');
+                $this->load->view('photo_gallery/photos/script', $data);
 	}
 	
 	/* Edit photos Begin */
@@ -270,15 +271,7 @@ class Photos extends CI_Controller
 					array('field' => 'name',
 							'label' => 'Name',
 							'rules' => 'trim|required|edit_unique[photos.name.'.$us_id['id'].']'),
-					array('field' => 'cat_id[]',
-							'label' => 'Category',
-							'rules' => 'trim|required'),
-					array('field' => 'sub_cat_id[]',
-							'label' => 'Sub Category',
-							'rules' => 'required'),
-					array('field' => 'sub_two_cat_id[]',
-							'label' => 'Sub level two category',
-							'rules' => 'trim|required'),
+					
 					array('field' => 'event',
 							'label' => 'Event',
 							'rules' => 'trim|required'),
@@ -291,8 +284,13 @@ class Photos extends CI_Controller
 			if($this->form_validation->run() == FALSE){
 				$data['ErrorMessages'] = validation_errors();
 			}
+                        elseif(sizeof($_POST['cat_id']) <= 0 ){
+                              $data['ErrorMessages'] = "Category field is required";
+                        }
 			else
 			{
+
+
 				$set_data=$_POST;
 				$image_path='';
 				
@@ -309,6 +307,10 @@ class Photos extends CI_Controller
 				 
 					
 					$this->load->library('upload', $config);
+                                       if($us_id['file_name']!="" && file_exists(PROJECT_PATH.PRODUCT_IMAGE_PATH.$us_id['file_name'])){
+						    unlink ( PROJECT_PATH.PRODUCT_IMAGE_PATH.$us_id['file_name'] );
+						    unlink ( PROJECT_PATH.PRODUCT_THUMB_IMAGE_PATH.$us_id['file_name']);
+						}
 					if (!$this->upload->do_upload('image'))
 					{
 						
@@ -318,12 +320,11 @@ class Photos extends CI_Controller
 					{
 						
 						$uploaddata = array('upload_data' => $this->upload->data());
-						$filename = $uploaddata['upload_data']['file_name'];
+						$filename = $image_path;
 						$this->_createThumbnail($filename,PROJECT_PATH.PRODUCT_IMAGE_PATH,PROJECT_PATH.PRODUCT_THUMB_IMAGE_PATH);
-						if($us_id['file_name']!="" && file_exists(PROJECT_PATH.PRODUCT_IMAGE_PATH.$us_id['file_name'])){
-						    unlink ( PROJECT_PATH.PRODUCT_IMAGE_PATH.$us_id['file_name'] );
-						    unlink ( PROJECT_PATH.PRODUCT_THUMB_IMAGE_PATH.$us_id['file_name']);
-						}
+
+
+						
 						
 					}
 				}
@@ -333,11 +334,13 @@ class Photos extends CI_Controller
 						'event' => $set_data['event'],
 						'last_update_by' => $this->session->userdata('uid'),
                                                 'description' => $set_data['description'],
-                                                'file_name' => $image_path,
+                                                
 						'status' => $set_data['status'],
                    				'updated_on' => date("Y-m-d H:i:s")
 					);
-					
+					if($image_path!=""){
+						$user_detail['file_name']=$image_path;
+                                        }
 					$this->photos_model->update_photos($user_detail,$id);
 					
                                         $p_id=$us_id['id'];
@@ -403,8 +406,8 @@ class Photos extends CI_Controller
  
 					$this->photos_model->add_photos_category($cat_data, $p_id);
                                         $this->photos_model->add_photos_tag($tag_data,$p_id);
-                                        $this->photos_model->add_photos_sub_category($sub_cat, $p_id);
-                                        $this->photos_model->add_photos_sub_two_category($sub_two_cat, $p_id);
+                                        $this->photos_model->add_photos_sub_category($sub_cat_data, $p_id);
+                                        $this->photos_model->add_photos_sub_two_category($sub_two_cat_data, $p_id);
 
 					$this->session->set_flashdata ('SucMessage',PHOTOS_PAGE." ".UPDATED_SUS);
 					redirect(base_url().'photo_gallery/photos/',"refresh");
@@ -412,22 +415,37 @@ class Photos extends CI_Controller
 			}
 		}
 	
-		if($this->photos_model->get_photos_details($id))
+		if($this->photos_model->get_photo_details($id))
 		{
-			$news_set_val=array();
-                        $data['details']=$this->photos_model->get_photos_details($id);
+			$news_set_val=array();$cat_set = array();
+                $sub_cat_set = array();
+                $sub_two_cat_set = array();
+                        $data['details']=$this->photos_model->get_photo_details($id);
                         $data['cat_list']=$this->photos_model->photo_category_list($val="");
                         $data['sub_cat_list']=$this->photos_model->photo_sub_category_list($val="");
                         $data['tag_list']=$this->photos_model->tag_name_list();
                         $data['sub_two_cat_list']=$this->photos_model->photo_sub_two_category_list($val="");
-
-		        $data['tags_set'] = $this->photos_model->get_photos_tags($id);
-                        $data['cat_set'] = $this->photos_model->get_photos_category($id);
-                        $data['sub_cat_set'] = $this->photos_model->get_photos_sub_category($id);
-                        $data['sub_two_cat_set'] = $this->photos_model->get_photos_sub_two_category($id);
+                        $data['tags_set']=$this->photos_model->get_photos_tags($id);
+                        $catset=$this->photos_model->get_photos_category($id);
+                         foreach ($catset as $item) {
+			     $cat_set[] = $item['cat_id'];
+			}
+                        $data['cat_set'] =$cat_set;
+                        $subcatset=$this->photos_model->get_photos_sub_category($id);
+                         foreach ($subcatset as $item) {
+			     $sub_cat_set[] = $item['sub_cat_id'];
+			}
+                        $data['sub_cat_set'] =$sub_cat_set;
+                        $subtwocatset=$this->photos_model->get_photos_sub_two_category($id);
+                         foreach ($subtwocatset as $item) {
+			     $sub_two_cat_set[] = $item['sub_two_cat_id'];
+			}
+                         $data['sub_two_cat_set'] =$sub_two_cat_set;
 			$this->load->view('header',$data);
 			$this->load->view('photo_gallery/photos/edit', $data);
 			$this->load->view('footer');
+                        $this->load->view('photo_gallery/photos/script', $data);
+		        
 		}
 		else {
 			redirect(base_url().'photo_gallery/photos/','refresh');
@@ -436,7 +454,7 @@ class Photos extends CI_Controller
 	}
 
 
-       public function view_photo($id)
+       public function view($id)
 	{
 		$data['site_title'] = PHOTOS_PAGE." - ".PHOTOS_VIEW;
 		$data['ErrorMessages'] = '';
@@ -445,11 +463,16 @@ class Photos extends CI_Controller
 		if($this->photos_model->get_photo_details($id))
 		{
 			$news_set_val=array();
-                        $data['details']=$this->photos_model->get_photos_details($id);
-                        $data['cat_list']=$this->photos_model->photos_category_list($id);
+                        $data['details']=$this->photos_model->get_photo_details($id);
+                        $data['tags_set']=$this->photos_model->get_photos_tags($id);
+                        $data['catset']=$this->photos_model->get_photos_categories_list($id);
+                        
 			$this->load->view('header',$data);
 			$this->load->view('photo_gallery/photos/view', $data);
 			$this->load->view('footer');
+                        $this->load->view('photo_gallery/photos/script1', $data);
+                       
+			
 		}
 		else {
 			redirect(base_url().'photo_gallery/photos/','refresh');
@@ -461,7 +484,7 @@ class Photos extends CI_Controller
 	
 	
 	//Delete the user
-	public function delete_photo($id)
+	public function delete($id)
 	{
 		if($this->photos_model->get_photo_details($id))
 		{
@@ -478,7 +501,7 @@ class Photos extends CI_Controller
 	}
 	
 	
-	public function ajax_sub_category_list()
+	public function ajax_list()
 	{
 		$SelId=(isset($_POST['SelId'])) ? $_POST['SelId']:'';
                 $SelType=(isset($_POST['SelType'])) ? $_POST['SelType']:'';
@@ -510,7 +533,7 @@ class Photos extends CI_Controller
                          if(!empty($SelId)){
 				$data=$this->photos_model->photo_sub_two_category_list($SelId);
 				if(sizeof($data)>0){
-					$JSonText='{"": "Select Sub category"}';
+					$JSonText='{"": "Select Sub level two category"}';
 					foreach($data as $val)
 					{
 						$JSonText.=',{"'.$val['id'].'": "'.$val['name'].'"}';

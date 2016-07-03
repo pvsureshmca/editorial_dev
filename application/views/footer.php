@@ -63,11 +63,26 @@
 <script src="<?php echo base_url(); ?>assets/js/tag_it/tag_it.js"></script>
 
 
+
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/ckeditor/ckeditor.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/js/tree/jquery.easing.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/js/tree/jqueryFileTree.js" type="text/javascript"></script>
 		<link href="<?php echo base_url(); ?>assets/js/tree/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+<?php if($this->uri->segment(2)=="photos"){  ?>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+
+
+
+<?php } ?>
+
 
 <!--common script init for all pages-->
 <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
@@ -92,6 +107,7 @@
         var base_url="<?php echo base_url(); ?>";
         var assets_url="<?php echo base_url().'assets/'; ?>";
         var text_file_path= "<?php echo PROJECT_PATH.FILE_PATH; ?>"; 
+        var image_file_path= "<?php echo PROJECT_PATH.PRODUCT_IMAGE_PATH; ?>"; 
 
 function get_path(id, replace_id){
 
@@ -113,8 +129,17 @@ CKEDITOR.instances[replace_id].setData(data)
 				});
 }
 
+function get_image(id){
+
+$('#'+id).fileTree({ root: image_file_path, script: base_url+'article/get_files/' }, function(file) { 
+
+var res = file.replace("<?php echo PROJECT_PATH; ?>", base_url);
+window.prompt("Copy to clipboard: Ctrl+C, Enter", res);
+//alert(res);
 
 
+});
+}
 
      
 </script>

@@ -18,7 +18,7 @@ class Photos_model extends CI_Model {
 	}
 
 	
-	public function photos_list()
+	public function photos_list($data)
 	{
 	
 	
@@ -38,7 +38,7 @@ class Photos_model extends CI_Model {
                     $this->db->where("P.id in (select photo_id from photos_sub_category where sub_cat_id='". $data['sub_cat_id']."')");
                     }
                       if(isset($data['sub_two_cat_id']) && !empty($data['sub_two_cat_id'])){
-                    $this->db->where("P.id in (select photo_id from photos_two_sub_category where sub_two_cat_id='". $data['sub_two_cat_id']."')");
+                    $this->db->where("P.id in (select photo_id from photos_sub_two_category where sub_two_cat_id='". $data['sub_two_cat_id']."')");
                     }
                     if(isset($data['status']) && !empty($data['status'])){
                     $this->db->where("P.status", $data['status']);
@@ -99,7 +99,20 @@ class Photos_model extends CI_Model {
 	{
 	
 		  // delete quotes
-		
+
+              $query = $this->db->query("select file_name from photos where  md5(id)='".$uid."'");
+		if($query->num_rows()>0)
+		{
+			$query_set = $query->result_array();
+
+                     foreach ($query_set as $item) {
+			     if($item['file_name']!="" && file_exists(PROJECT_PATH.PRODUCT_IMAGE_PATH.$item['file_name'])){
+						    unlink ( PROJECT_PATH.PRODUCT_IMAGE_PATH.$item['file_name'] );
+						    unlink ( PROJECT_PATH.PRODUCT_THUMB_IMAGE_PATH.$item['file_name']);
+						}
+			}
+
+                }
                 $this->db->where('md5(photo_id)', $uid);
 		$this->db->delete('photos_sub_category');
                 $this->db->where('md5(photo_id)', $uid);
@@ -325,6 +338,73 @@ class Photos_model extends CI_Model {
 			$query_set = $query->result_array();
 			
 			return $query_set;
+		}
+		return array();
+	}
+
+         public function get_photos_categories_list($id)
+	{
+		$select=array('T.id','T.name');
+		$this->db->select($select);
+		$this->db->from('photo_category AS T');
+                $this->db->where("T.id in (select cat_id from photos_category where  md5(photo_id)='".$id."') or
+                                  T.id in (select cat_id from photo_sub_category where  id in 
+                                  (select sub_cat_id from photos_sub_category where md5(photo_id)='".$id."')) or
+                                  T.id in (select cat_id from photo_sub_two_category where  id in 
+                                  (select sub_two_cat_id from photos_sub_two_category where md5(photo_id)='".$id."')) ");
+		$this->db->order_by("T.name", "asc");
+               
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+		{
+			$catset = $query->result_array();
+                        
+                        for ($i=0;$i< sizeof($catset);$i++){
+                              
+                                $sel=array('T.id','T.name');
+				$this->db->select($sel);
+				$this->db->from('photo_sub_category AS T');
+                                $this->db->where("T.cat_id", $catset[$i]['id']);
+				$this->db->where("(T.id in (select id from photo_sub_category where  id in 
+				                  (select sub_cat_id from photos_sub_category where md5(photo_id)='".$id."')) or
+				                  T.id in (select sub_cat_id from photo_sub_two_category where  id in 
+				                  (select sub_two_cat_id from photos_sub_two_category where md5(photo_id)='".$id."'))) ");
+				$this->db->order_by("T.name", "asc");
+			        $qry = $this->db->get();
+
+                                if($qry->num_rows()>0)
+		                {
+                                      $scatset = $qry->result_array();
+                                      $catset[$i]['sub_cat']=$scatset;
+
+                                       for ($j=0;$j< sizeof($scatset);$j++){
+                              
+		                        $selt=array('T.id','T.name');
+					$this->db->select($selt);
+					$this->db->from('photo_sub_two_category AS T');
+		                        $this->db->where("T.cat_id", $catset[$i]['id']);
+                                        $this->db->where("T.sub_cat_id", $scatset[$j]['id']);
+					$this->db->where("T.id in  
+                                        (select sub_two_cat_id from photos_sub_two_category where md5(photo_id)='".$id."') ");
+					$this->db->order_by("T.name", "asc");
+					$qryt = $this->db->get();
+
+		                        if($qryt->num_rows()>0)
+				        {
+		                              $stcatset = $qryt->result_array();
+		                              $catset[$i]['sub_cat'][$j]['sub_two_cat']=$stcatset;
+
+					}
+		                         else{ $catset[$i]['sub_cat'][$j]['sub_two_cat']=array(); }
+				    
+				}
+
+				}
+                                 else{ $catset[$i]['sub_cat']=array(); }
+			    
+			}
+			// echo "<pre>"; print_r($catset);exit;
+			return $catset;
 		}
 		return array();
 	}

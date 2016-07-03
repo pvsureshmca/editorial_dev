@@ -41,6 +41,16 @@ class Article_model extends CI_Model {
                     if(isset($data['newspaper_id']) && !empty($data['newspaper_id'])){
                     $this->db->where("P.id in (select article_id from article_newspaper where newspaper_id='". $data['newspaper_id']."')");
                     }
+   
+                     if(isset($data['photos_id']) && !empty($data['photos_id'])){
+                    $this->db->where("(P.paper_summary like '%". $data['photos_id']."%' OR
+                                       P.web_summary like '%". $data['photos_id']."%' OR 
+                                       P.mobile_summary like '%". $data['photos_id']."%' OR
+                                       P.paper_description like '%". $data['photos_id']."%' OR
+                                       P.web_description like '%". $data['photos_id']."%' OR
+                                       P.mobile_description like '%". $data['photos_id']."%' )");
+                    }
+
                     if(isset($data['status']) && !empty($data['status'])){
                     $this->db->where("P.status", $data['status']);
                     }
@@ -448,7 +458,25 @@ class Article_model extends CI_Model {
 		return true;
 	}
 	
+	 public function photos_list()
+	{
 	
+	
+		$query_set=array();
+	
+		$select=array('P.*');
+	
+		$this->db->select($select);
+		$this->db->from('photos P');
+		$this->db->order_by("P.name", "asc");
+		$query = $this->db->get();
+	
+		if($query->num_rows()>0)
+		{
+			$query_set = $query->result_array();
+		}
+		return $query_set;
+	}
 	
 }
 ?>

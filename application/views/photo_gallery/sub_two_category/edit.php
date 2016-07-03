@@ -40,7 +40,7 @@
 									
 									<div class="col-lg-6">
 										
-										<select  class="form-control" style="width: 100%" id="cat_id" name="cat_id"  onChange="GoToPrintJSONAjaxData('sub_two_category/ajax_list', 'SubCat',this.value,'sub_cat_id','')" >
+										<select  class="form-control" style="width: 100%" id="cat_id" name="cat_id"  onChange="GoToPrintJSONAjaxData('photo_gallery/sub_two_category/ajax_list', 'SubCat',this.value,'sub_cat_id','')" >
 
 											<option value="">Select Category</option>
 										<?php if(sizeof($category_list)>0){	foreach ( $category_list as $detail ) {?>

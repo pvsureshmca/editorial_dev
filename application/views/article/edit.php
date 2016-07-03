@@ -285,6 +285,15 @@
             </section>
             <!--tab nav end-->
 
+<div class="form-group ">
+<div class="control-label col-lg-2" > <button class="btn btn-primary"  onclick="get_image('art_image')" type="button">Photos</button> </div> 
+ <div class="col-lg-8" style="padding-bottom: 10Px;" > 
+
+<div id="art_image" class="demo"></div>
+
+</div>
+
+</div>
 
 <!--tab nav start-->
             <section class="panel">

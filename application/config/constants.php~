@@ -73,6 +73,13 @@ define('TAGS_LIST','Tag List');
 define('TAGS_ADD','Add Tag');
 define('TAGS_EDIT','Edit Tag');
 
+define('PHOTOS_PAGE','Photos');
+define('PHOTOS_LIST','Photo List');
+define('PHOTOS_ADD','Add Photo');
+define('PHOTOS_EDIT','Edit Photo');
+define('PHOTOS_VIEW','View Photo');
+
+
 define('SUBCAT_PAGE','Sub Category');
 define('SUBCAT_LIST','Sub Category List');
 define('SUBCAT_ADD','Add Sub Category');

@@ -39,6 +39,7 @@ class Article extends CI_Controller
                 $data['newspaper_list']=$this->article_model->news_paper_list();
                 $data['user_list']=$this->article_model->user_list();
                 $data['tag_list']=$this->article_model->tag_list();
+                $data['photos_list']=$this->article_model->photos_list();
                 $data['post_data']=$set_data;
 		$this->load->view('header',$data);
 		$this->load->view('article/list', $data);

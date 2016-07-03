@@ -69,7 +69,7 @@
                                    
                                     <?php foreach ($news_set as $news) { ?>
                                         
-                                               <div  class="col-lg-3">  <p class="form-control"> <?php echo $news['name']; ?> </p></div>
+                                              <p style="color: #1D1616;"> => <?php echo $news['name']; ?> </p>
                                             <?php } ?> 
                                
 
@@ -111,7 +111,7 @@
 
                                                                       
                                                         <?php if(sizeof($tags_set)>0){	foreach ( $tags_set as $tags_val ) {?>
-											<div  class="col-lg-3">  <p class="form-control"> <?php echo $tags_val['name']; ?> </p></div>
+											<p style="color: #1D1616;"> => <?php echo $tags_val['name']; ?> </p>
                                                          <?php } }?> 
                                                                             
 										
@@ -183,7 +183,7 @@
                     <div class="tab-content">
 
 
-                        <div id="Paper" class="tab-pane active">
+                        <div id="paper" class="tab-pane active">
 
 				<div class="col-lg-12"><h5><b>Paper Summary</b> </h5> </div>
  
