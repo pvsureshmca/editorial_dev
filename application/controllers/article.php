@@ -200,7 +200,7 @@ class Article extends CI_Controller
                                             $this->generate_xml_file(md5($p_id));
                                          }
 					$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".CREATED_SUS);
-					redirect(base_url().'article/',"refresh");
+					redirect(base_url().'article/edit/'.md5($p_id).'/',"refresh");
 				
 				
 				
@@ -344,7 +344,7 @@ class Article extends CI_Controller
                                             $this->generate_xml_file($id);
                                       }
 					$this->session->set_flashdata ('SucMessage',ARTICLE_PAGE." ".UPDATED_SUS);
-					redirect(base_url().'article/',"refresh");
+					redirect(base_url().'article/edit/'.$id.'/',"refresh");
 				
 			}
 		}

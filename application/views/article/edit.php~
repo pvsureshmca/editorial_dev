@@ -33,6 +33,20 @@
                                 <?php echo $ErrorMessages;  ?>
                             </div>
 <?php } ?>
+
+<?php if ($this->session->flashdata('SucMessage')!='') { ?>
+<div class="alert alert-success alert-block fade in">
+			<button data-dismiss="alert" class="close close-sm" type="button">
+				<i class="fa fa-times"></i>
+			</button>
+			<h4>
+				<i class="icon-ok-sign"></i>
+
+			</h4>
+			<p><?php echo $this->session->flashdata('SucMessage');  ?></p>
+		</div>
+
+<?php } ?>
 							<form class="cmxform form-horizontal " id="article_add"
 								method="post" action="<?php echo base_url();?>article/edit/<?php echo $this->uri->segment(3); ?>/" novalidate="novalidate" enctype="multipart/form-data">
 								
@@ -148,7 +162,7 @@
                     <div class="tab-content">
 
 
-                        <div id="Paper" class="tab-pane active">
+                        <div id="paper" class="tab-pane active">
 
 <div class="col-lg-4">
                             <h5><b>Paper Summary</b> 

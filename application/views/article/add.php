@@ -151,7 +151,7 @@
                     <div class="tab-content">
 
 
-                        <div id="Paper" class="tab-pane active">
+                        <div id="paper" class="tab-pane active">
 
 <div class="col-lg-3">
                             <h5><b>Paper Summary</b> 
